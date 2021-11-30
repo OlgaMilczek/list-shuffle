@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container p-5">
+  <div id="app" class="container p-5 animated-background">
     <div class="row pb-4">
       <div class="col-8">
         <InputWithLabel :model.sync="title" label="Change title" inputId="title" :disable="activeItemIndex === null" />
@@ -65,3 +65,26 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import "src/assets/scss/bootstrap/variables";
+
+.animated-background {
+  background: linear-gradient(0deg, $gray-100, $gray-400);
+  background-size: 200% 200%;
+  animation: gradient 20s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+</style>
