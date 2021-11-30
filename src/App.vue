@@ -70,7 +70,7 @@ export default class App extends Vue {
 @import "src/assets/scss/bootstrap/variables";
 
 .animated-background {
-  background: linear-gradient(0deg, $gray-100, $gray-400);
+  background: linear-gradient(0deg, lighten($primary, 15%), lighten($primary, 30%), $white);
   background-size: 200% 200%;
   animation: gradient 20s ease infinite;
   height: 100vh;
