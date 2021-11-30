@@ -1,29 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="app" class="container p-5">
+    <div class="row">
+      <div class="col pb-4">
+        <button class="btn btn-primary" @click="shuffleList"> shuffle list </button>
+      </div>
+    </div>
+   <Grid :list="list">
+     <template v-slot={item}>
+        <Item :item="item.item" :isActive="item.index === activeItemIndex" @click.native="() => onItemClick(item.index)" />
+     </template>
+   </Grid>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from './components/HelloWorld.vue'
+
+import { Grid } from '@/components/atoms'
+import { Item } from '@/components/molecules'
+
+import { Container } from '@/data/Container'
 
 @Component({
-  components: {
-    HelloWorld
-  }
+  components: { Grid, Item }
 })
-export default class App extends Vue {}
-</script>
+export default class App extends Vue {
+  public container = new Container()
+  public activeItemIndex: number | null = null
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  public get list (): Array<Record<string, unknown>> {
+    return this.container.list
+  }
+
+  public onItemClick (index: number): void {
+    if (this.activeItemIndex === index) {
+      this.activeItemIndex = null
+      return
+    }
+    this.activeItemIndex = index
+  }
+
+  public shuffleList (): void {
+    this.container.shuffleList()
+  }
 }
-</style>
+</script>
