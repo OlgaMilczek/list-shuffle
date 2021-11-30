@@ -1,5 +1,5 @@
 <template>
-  <div class="d-grid" :style="{ gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridGap: gridGap }">
+  <div class="d-grid" :style="{ gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)` }">
     <template v-for="(item, index) in list">
       <slot v-bind:item="{item, index}" />
     </template>
@@ -14,9 +14,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
   name: 'Grid'
 })
 export class Grid extends Vue {
-  @Prop({ type: String, required: false, default: '1rem' })
-  public readonly gridGap!: string
-
   @Prop({ type: Number, required: false, default: 3 })
   public readonly numberOfColumns!: number
 
@@ -26,3 +23,11 @@ export class Grid extends Vue {
 
 export default Grid
 </script>
+<style lang="scss" scoped>
+@import "src/assets/scss/bootstrap/variables";
+
+.d-grid {
+  grid-gap: $grid-gutter-width;
+}
+
+</style>
