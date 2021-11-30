@@ -1,7 +1,7 @@
 <template>
   <div class="d-grid" :style="{ gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`, gridGap: gridGap }">
-    <template v-for="item in list">
-      <slot v-bind:item="item" />
+    <template v-for="(item, index) in list">
+      <slot v-bind:item="{item, index}" />
     </template>
   </div>
 </template>
