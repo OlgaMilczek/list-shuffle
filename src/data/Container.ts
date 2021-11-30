@@ -36,6 +36,9 @@ export class Container implements IContainer {
 
       [this.list[i], this.list[newIndex]] = [this.list[newIndex], this.list[i]]
     }
+
+    // Using method reverse allow to detect changes in Vue
+    this.list.reverse()
   }
 
   /**
