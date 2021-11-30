@@ -1,3 +1,5 @@
+import * as faker from 'faker'
+
 import { IContainer } from './Container.contracts'
 
 export class Container implements IContainer {
@@ -6,7 +8,7 @@ export class Container implements IContainer {
    */
   public list: Record<string, unknown>[]
 
-  constructor (objectList: Record<string, unknown>[] = []) {
+  constructor (objectList: Record<string, unknown>[] = Container.createExampleList()) {
     this.list = objectList
   }
 
@@ -34,5 +36,18 @@ export class Container implements IContainer {
 
       [this.list[i], this.list[newIndex]] = [this.list[newIndex], this.list[i]]
     }
+  }
+
+  /**
+   * Method to create example list
+   * @param numberOfElement
+   * @return list of objects with one property title
+   */
+  public static createExampleList (numberOfElement = 6): Array<Record<string, unknown>> {
+    return [...Array(numberOfElement).keys()].map(() => {
+      return {
+        title: faker.lorem.words()
+      }
+    })
   }
 }
