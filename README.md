@@ -14,5 +14,3 @@ yarn install
 ```
 yarn serve
 ```
-
-
